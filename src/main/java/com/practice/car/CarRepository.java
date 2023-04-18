@@ -3,12 +3,13 @@ package com.practice.car;
 import org.slf4j.Logger;
 import java.util.Random;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NonDbRepository {
+public class CarRepository {
 	private final long sleepTime = 3000L;
-	private final Logger logger = LoggerFactory.getLogger(NonDbRepository.class);
+	private final Logger logger = LoggerFactory.getLogger(CarRepository.class);
 
 	private void makeSlowService(){
 		logger.info("start sleep");
@@ -27,13 +28,12 @@ public class NonDbRepository {
 		String colors[] = {"red", "blue", "gray", "white", "purple"};
 		for(int i = 0; i < 5; i++){
 			int b = rn.nextInt(5);
-			logger.info("" + b);
 			car.setColor(colors[b]);
 		}
 		return car;
 	}
 
-
+	@Cacheable(cacheNames = "carName", key = "#name")
 	public Car getByName(String name){
 		makeSlowService();
 		Car myCar = new Car (name);

@@ -1,6 +1,5 @@
 package com.practice.car;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DbRepositoryTest {
 
 	@Autowired
-	NonDbRepository nonDbRepository = new NonDbRepository();
+	CarRepository nonDbRepository = new CarRepository();
 
 	@Test
 	@DisplayName("자동차 색 랜덤으로 나오는지 확인")
